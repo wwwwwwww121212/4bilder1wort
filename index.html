@@ -8,8 +8,8 @@
         /* Grundlegendes Styling der Seite */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
+            background: linear-gradient(135deg, #3498db, #9b59b6);
+            color: #fff;
             margin: 0;
             padding: 0;
             display: flex;
@@ -20,7 +20,7 @@
         }
 
         .container {
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.9);
             padding: 40px;
             border-radius: 12px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -48,6 +48,23 @@
             font-size: 20px;
             border-radius: 6px;
             border: 1px solid #3498db;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .username-input button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .username-input button:hover {
+            background-color: #2980b9;
         }
 
         /* Bilder */
@@ -61,10 +78,15 @@
 
         .images img {
             width: 100%;
-            max-width: 350px;
+            max-width: 400px;
             height: auto;
             border-radius: 8px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .images img:hover {
+            transform: scale(1.05);
         }
 
         /* Eingabefelder für das Rätsel */
@@ -82,6 +104,40 @@
             border-radius: 8px;
             outline: none;
             background-color: #ecf0f1;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-boxes input:focus {
+            border-color: #2980b9;
+        }
+
+        /* Alphabet */
+        .alphabet {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .alphabet button {
+            font-size: 18px;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .alphabet button:hover {
+            background-color: #2980b9;
+        }
+
+        .alphabet button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
         }
 
         /* Ergebnisnachricht */
@@ -102,14 +158,25 @@
         .result-message.failure {
             background-color: #e74c3c;
         }
+
+        /* Animation */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Benutzername Eingabe -->
         <div class="username-input">
-            <h1>Enter your Username:</h1>
-            <input type="text" id="username" placeholder="Enter username">
+            <h1>Enter your Username</h1>
+            <input type="text" id="username" placeholder="Enter your username">
             <button onclick="startGame()">Start Game</button>
         </div>
 
@@ -137,6 +204,19 @@
                 <input type="text" id="box7" maxlength="1" oninput="moveFocus(7)">
                 <input type="text" id="box8" maxlength="1" oninput="moveFocus(8)">
                 <input type="text" id="box9" maxlength="1" oninput="moveFocus(9)">
+            </div>
+
+            <!-- Alphabet -->
+            <div class="alphabet">
+                <button onclick="typeLetter('A')">A</button>
+                <button onclick="typeLetter('B')">B</button>
+                <button onclick="typeLetter('C')">C</button>
+                <button onclick="typeLetter('D')">D</button>
+                <button onclick="typeLetter('E')">E</button>
+                <button onclick="typeLetter('F')">F</button>
+                <button onclick="typeLetter('G')">G</button>
+                <button onclick="typeLetter('H')">H</button>
+                <button onclick="typeLetter('I')">I</button>
             </div>
 
             <!-- Überprüfungsbutton -->
@@ -168,26 +248,14 @@
             }
         }
 
-        // Überprüfen, ob das eingegebene Wort korrekt ist
-        function checkWord() {
-            const word = "ROBINHOOD";
-            let userWord = "";
+        // Buchstaben in die Boxen tippen
+        function typeLetter(letter) {
             for (let i = 1; i <= 9; i++) {
-                userWord += document.getElementById('box' + i).value.toUpperCase();
+                if (document.getElementById('box' + i).value === '') {
+                    document.getElementById('box' + i).value = letter;
+                    break;
+                }
             }
-
-            let resultMessage = document.getElementById('resultMessage');
-            if (userWord === word) {
-                resultMessage.classList.add('success');
-                resultMessage.classList.remove('failure');
-                resultMessage.innerHTML = `Congratulations, ${localStorage.getItem('username')}! You've guessed the word!`;
-            } else {
-                resultMessage.classList.add('failure');
-                resultMessage.classList.remove('success');
-                resultMessage.innerHTML = `Oops, ${localStorage.getItem('username')}! Try again!`;
-            }
-            resultMessage.style.display = 'block';
         }
-    </script>
-</body>
-</html>
+
+        // Überprüfen, ob das eingegebene Wort korrekt
