@@ -16,12 +16,6 @@
       align-items: center;
       min-height: 100vh;
       color: #333;
-      animation: fadeInBody 1s ease-in;
-    }
-
-    @keyframes fadeInBody {
-      from {opacity: 0;}
-      to {opacity: 1;}
     }
 
     .container {
@@ -32,12 +26,6 @@
       text-align: center;
       width: 95%;
       max-width: 850px;
-      animation: fadeIn 1.2s ease;
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: scale(0.95);}
-      to {opacity: 1; transform: scale(1);}
     }
 
     h1 {
@@ -50,16 +38,15 @@
     .images {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      grid-gap: 15px;
+      gap: 15px;
       margin-bottom: 30px;
     }
 
     .images img {
       width: 100%;
-      border-radius: 12px;
-      height: auto;
-      max-height: 200px;
+      aspect-ratio: 7 / 5;
       object-fit: cover;
+      border-radius: 12px;
       box-shadow: 0 6px 15px rgba(0,0,0,0.15);
       transition: transform 0.3s ease;
     }
@@ -141,19 +128,11 @@
     .checker-message.correct {
       background-color: #2ecc71;
       color: white;
-      animation: pop 0.5s ease;
     }
 
     .checker-message.incorrect {
       background-color: #e74c3c;
       color: white;
-      animation: pop 0.5s ease;
-    }
-
-    @keyframes pop {
-      0% {transform: scale(0.8); opacity: 0;}
-      50% {transform: scale(1.1); opacity: 1;}
-      100% {transform: scale(1); opacity: 1;}
     }
 
     button.check-btn {
@@ -199,7 +178,32 @@
     </div>
 
     <div class="alphabet">
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('').forEach(l => document.write(`<button onclick="typeLetter('${l}')">${l}</button>`));
+      <button onclick="typeLetter('A')">A</button>
+      <button onclick="typeLetter('B')">B</button>
+      <button onclick="typeLetter('C')">C</button>
+      <button onclick="typeLetter('D')">D</button>
+      <button onclick="typeLetter('E')">E</button>
+      <button onclick="typeLetter('F')">F</button>
+      <button onclick="typeLetter('G')">G</button>
+      <button onclick="typeLetter('H')">H</button>
+      <button onclick="typeLetter('I')">I</button>
+      <button onclick="typeLetter('J')">J</button>
+      <button onclick="typeLetter('K')">K</button>
+      <button onclick="typeLetter('L')">L</button>
+      <button onclick="typeLetter('M')">M</button>
+      <button onclick="typeLetter('N')">N</button>
+      <button onclick="typeLetter('O')">O</button>
+      <button onclick="typeLetter('P')">P</button>
+      <button onclick="typeLetter('Q')">Q</button>
+      <button onclick="typeLetter('R')">R</button>
+      <button onclick="typeLetter('S')">S</button>
+      <button onclick="typeLetter('T')">T</button>
+      <button onclick="typeLetter('U')">U</button>
+      <button onclick="typeLetter('V')">V</button>
+      <button onclick="typeLetter('W')">W</button>
+      <button onclick="typeLetter('X')">X</button>
+      <button onclick="typeLetter('Y')">Y</button>
+      <button onclick="typeLetter('Z')">Z</button>
     </div>
 
     <button class="check-btn" onclick="checkWord()">Check Word</button>
