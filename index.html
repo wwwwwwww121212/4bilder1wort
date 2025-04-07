@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 Pictures 1 Word - Robin Hood</title>
+    <style>
+        /* Grundlegendes Styling der Seite */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 900px;
+        }
+
+        h1 {
+            font-size: 40px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Bilder */
+        .images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 15px;
+            margin-bottom: 30px;
+            justify-items: center;
+        }
+
+        .images img {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .images img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Eingabefelder für das Rätsel */
+        .input-boxes {
+            margin-bottom: 20px;
+        }
+
+        .input-boxes input {
+            width: 50px;
+            height: 60px;
+            margin: 5px;
+            font-size: 30px;
+            text-align: center;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            outline: none;
+            background-color: #ecf0f1;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-boxes input:focus {
+            border-color: #2980b9;
+        }
+
+        .input-boxes input.correct {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .input-boxes input.incorrect {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        /* Alphabet-Tasten */
+        .alphabet {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .alphabet button {
+            font-size: 18px;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .alphabet button:hover {
+            background-color: #2980b9;
+        }
+
+        .alphabet button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        /* Animation für Fade-in Effekt */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Animation für den Checker */
+        @keyframes correctAnimation {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Stil für den Checker */
+        .checker-message {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 6px;
+            display: none;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .checker-message.correct {
+            background-color: #2ecc71;
+            color: white;
+            animation: correctAnimation 0.5s ease-out;
+        }
+
+        .checker-message.incorrect {
+            background-color: #e74c3c;
+            color: white;
+            animation: correctAnimation 0.5s ease-out;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Guess the Word!</h1>
+
+        <!-- Bilder anzeigen -->
+        <div class="images">
+            <img src="bilder/robin1.jpg" alt="Image 1">
+            <img src="bilder/robin2.jpg" alt="Image 2">
+            <img src="bilder/robin3.jpg" alt="Image 3">
+            <img src="bilder/robin4.jpg" alt="Image 4">
+        </div>
+
+        <!-- Leere Eingabefelder für "ROBIN HOOD" mit einer Lücke zwischen "ROBIN" und "HOOD" -->
+        <div class="input-boxes">
+            <!-- Eingabefelder für "ROBIN" -->
+            <input type="text" id="box1" maxlength="1" oninput="moveFocus(1)">
+            <input type="text" id="box2" maxlength="1" oninput="moveFocus(2)">
+            <input type="text" id="box3" maxlength="1" oninput="moveFocus(3)">
+            <input type="text" id="box4" maxlength="1" oninput="moveFocus(4)">
+            <input type="text" id="box5" maxlength="1" oninput="moveFocus(5)">
+            
+            <!-- Leere Lücke zwischen "ROBIN" und "HOOD" -->
+            <span style="width: 20px; display: inline-block;"></span>
+
+            <!-- Eingabefelder für "HOOD" -->
+            <input type="text" id="box6" maxlength="1" oninput="moveFocus(6)">
+            <input type="text" id="box7" maxlength="1" oninput="moveFocus(7)">
+            <input type="text" id="box8" maxlength="1" oninput="moveFocus(8)">
+            <input type="text" id="box9" maxlength="1" oninput="moveFocus(9)">
+        </div>
+
+        <!-- Alphabet -->
+        <div class="alphabet">
+            <button onclick="typeLetter('A')">A</button>
+            <button onclick="typeLetter('B')">B</button>
+            <button onclick="typeLetter('C')">C</button>
+            <button onclick="typeLetter('D')">D</button>
+            <button onclick="typeLetter('E')">E</button>
+            <button onclick="typeLetter('F')">F</button>
+            <button onclick="typeLetter('G')">G</button>
+            <button onclick="typeLetter('H')">H</button>
+            <button onclick="typeLetter('I')">I</button>
+            <button onclick="typeLetter('J')">J</button>
+            <button onclick="typeLetter('K')">K</button>
+            <button onclick="typeLetter('L')">L</button>
+            <button onclick="typeLetter('M')">M</button>
+            <button onclick="typeLetter('N')">N</button>
+            <button onclick="typeLetter('O')">O</button>
+            <button onclick="typeLetter('P')">P</button>
+            <button onclick="typeLetter('Q')">Q</button>
+            <button onclick="typeLetter('R')">R</button>
+            <button onclick="typeLetter('S')">S</button>
+            <button onclick="typeLetter('T')">T</button>
+            <button onclick="typeLetter('U')">U</button>
+            <button onclick="typeLetter('V')">V</button>
+            <button onclick="typeLetter('W')">W</button>
+            <button onclick="typeLetter('X')">X</button>
+            <button onclick="typeLetter('Y')">Y</button>
+            <button onclick="typeLetter('Z')">Z</button>
+        </div>
+
+        <!-- Überprüfungsbutton -->
+        <button onclick="checkWord()">Check Word</button>
+
+        <!-- Checker Nachricht -->
+        <div id="checkerMessage" class="checker-message"></div>
+    </div>
+
+    <script>
+        // Automatisch zum nächsten Feld springen
+        function moveFocus(currentBox) {
+            if (currentBox < 9) {
+                document.getElementById('box' + (currentBox + 1)).focus();
+            }
+        }
+
+        // Buchstaben in die Boxen tippen
+        function typeLetter(letter) {
+            for (let i = 1; i <= 9; i++) {
+                if (document.getElementById('box' + i).value === '') {
+                    document.getElementById('box' + i).value = letter;
+                    break;
+                }
+            }
+        }
+
+        // Überprüfen, ob das eingegebene Wort korrekt ist
+        function checkWord() {
+            const word = "ROBINHOOD";
+            let userWord = "";
+            for (let i = 1; i <= 9; i++) {
+                userWord += document.getElementById('box' + i).value.toUpperCase();
+            }
+
+            let checkerMessage = document.getElementById('checkerMessage');
+            if (userWord === word) {
+                checkerMessage.classList.add('correct');
+                checkerMessage.classList.remove('incorrect');
+                checkerMessage.innerHTML = "Congratulations! You've guessed the word!";
+                checkerMessage.style.display = "block";
+                markCorrect();
+            } else {
+                checkerMessage.classList.add('incorrect');
+                checkerMessage.classList.remove('correct');
+                checkerMessage.innerHTML = "Oops! Try again!";
+                checkerMessage.style.display = "block";
+                resetInputs();
+            }
+        }
+
+        // Markiere die Eingabefelder als korrekt
+        function markCorrect() {
+            for (let i = 1; i <= 9; i++) {
+                document.getElementById('box' + i).classList.add('correct');
+            }
+        }
+
+        // Setzt alle Eingabefelder zurück
+        function resetInputs() {
+            for (let i = 1; i <= 9; i++) {
+                document.getElementById('box' + i).value = '';
+                document.getElementById('box' + i).classList.remove('correct', 'incorrect');
+            }
+        }
+    </script>
+</body>
+</html>
