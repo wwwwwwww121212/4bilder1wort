@@ -8,7 +8,9 @@
         /* Grundlegendes Styling der Seite */
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1a1a1a, #141414);
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.7), rgba(155, 89, 182, 0.7)), url('background.jpg');
+            background-size: cover;
+            background-position: center;
             color: #fff;
             margin: 0;
             padding: 0;
@@ -17,18 +19,35 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
+            position: relative;
         }
 
+        /* Futuristische geometrische Muster */
+        .pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.2) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        /* Container */
         .container {
             background-color: rgba(255, 255, 255, 0.1);
             padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
             text-align: center;
             width: 80%;
             max-width: 900px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 2;
         }
 
         h1 {
@@ -38,7 +57,7 @@
             text-transform: uppercase;
             font-weight: bold;
             letter-spacing: 5px;
-            text-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
+            text-shadow: 0 0 15px rgba(52, 152, 219, 1), 0 0 30px rgba(52, 152, 219, 0.8);
             animation: fadeIn 1s ease-in-out;
         }
 
@@ -185,6 +204,9 @@
     </style>
 </head>
 <body>
+    <!-- Hintergrundmuster -->
+    <div class="pattern"></div>
+
     <div class="container">
         <h1>Guess the Word!</h1>
 
