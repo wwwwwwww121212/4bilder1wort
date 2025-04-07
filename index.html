@@ -174,14 +174,14 @@
 <body>
     <div class="container">
         <!-- Benutzername Eingabe -->
-        <div class="username-input">
+        <div class="username-input" id="usernameInput">
             <h1>Enter your Username</h1>
             <input type="text" id="username" placeholder="Enter your username">
             <button onclick="startGame()">Start Game</button>
         </div>
 
         <!-- Spielbereich -->
-        <div class="game-area" style="display:none;">
+        <div class="game-area" id="gameArea" style="display:none;">
             <h1>Guess the Word!</h1>
 
             <!-- Bilder anzeigen -->
@@ -233,8 +233,8 @@
             const username = document.getElementById('username').value;
             if (username.trim() !== '') {
                 localStorage.setItem('username', username); // Speichert den Benutzernamen
-                document.querySelector('.username-input').style.display = 'none';
-                document.querySelector('.game-area').style.display = 'block';
+                document.getElementById('usernameInput').style.display = 'none';
+                document.getElementById('gameArea').style.display = 'block';
                 document.querySelector('h1').innerText = `Welcome, ${username}!`;
             } else {
                 alert('Please enter a valid username.');
@@ -258,4 +258,5 @@
             }
         }
 
-        // Überprüfen, ob das eingegebene Wort korrekt
+        // Überprüfen, ob das eingegebene Wort korrekt ist
+        function check
