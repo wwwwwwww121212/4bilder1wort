@@ -259,4 +259,23 @@
         }
 
         // Überprüfen, ob das eingegebene Wort korrekt ist
-        function check
+        function checkWord() {
+            const correctWord = "ROBINHOOD";
+            let userGuess = "";
+            for (let i = 1; i <= 9; i++) {
+                userGuess += document.getElementById('box' + i).value.toUpperCase();
+            }
+
+            if (userGuess === correctWord) {
+                document.getElementById('resultMessage').innerText = 'Congratulations! You guessed the word correctly!';
+                document.getElementById('resultMessage').classList.add('success');
+            } else {
+                document.getElementById('resultMessage').innerText = 'Oops! Try again!';
+                document.getElementById('resultMessage').classList.add('failure');
+            }
+
+            document.getElementById('resultMessage').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
