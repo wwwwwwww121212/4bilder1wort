@@ -1,259 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>4 Pictures 1 Word - Robin Hood</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #1abc9c, #2ecc71);
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      color: #333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 Pictures 1 Word - Robin Hood</title>
+    <style>
+        /* Grundlegendes Styling der Seite */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #141414);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-    .container {
-      background-color: white;
-      padding: 40px 30px;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      width: 95%;
-      max-width: 850px;
-    }
+        .container {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 80%;
+            max-width: 900px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
 
-    h1 {
-      font-size: 42px;
-      color: #2c3e50;
-      margin-bottom: 25px;
-      font-weight: 600;
-    }
+        h1 {
+            font-size: 48px;
+            color: #3498db;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 5px;
+            text-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
+            animation: fadeIn 1s ease-in-out;
+        }
 
-    .images {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      margin-bottom: 30px;
-    }
+        /* Bilder */
+        .images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 15px;
+            margin-bottom: 30px;
+            justify-items: center;
+        }
 
-    .images img {
-      width: 100%;
-      aspect-ratio: 7 / 5;
-      object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-      transition: transform 0.3s ease;
-    }
+        .images img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
 
-    .images img:hover {
-      transform: scale(1.03);
-    }
+        .images img:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
 
-    .input-boxes {
-      margin-bottom: 25px;
-    }
+        /* Eingabefelder für das Rätsel */
+        .input-boxes {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
 
-    .input-boxes input {
-      width: 48px;
-      height: 60px;
-      margin: 5px;
-      font-size: 28px;
-      text-align: center;
-      border: 2px solid #1abc9c;
-      border-radius: 10px;
-      background-color: #ecf0f1;
-      transition: 0.3s;
-    }
+        .input-boxes input {
+            width: 60px;
+            height: 70px;
+            font-size: 32px;
+            text-align: center;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 2px solid #3498db;
+            color: #fff;
+            transition: transform 0.2s ease-in-out, border-color 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
 
-    .input-boxes input:focus {
-      border-color: #16a085;
-    }
+        .input-boxes input:focus {
+            transform: scale(1.05);
+            border-color: #1abc9c;
+            outline: none;
+        }
 
-    .input-boxes input.correct {
-      background-color: #2ecc71;
-      color: white;
-    }
+        .input-boxes input.correct {
+            background-color: #2ecc71;
+            color: white;
+        }
 
-    .input-boxes input.incorrect {
-      background-color: #e74c3c;
-      color: white;
-    }
+        .input-boxes input.incorrect {
+            background-color: #e74c3c;
+            color: white;
+        }
 
-    .alphabet {
-      display: grid;
-      grid-template-columns: repeat(9, 1fr);
-      gap: 10px;
-      margin-top: 10px;
-      margin-bottom: 30px;
-    }
+        /* Alphabet */
+        .alphabet {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
 
-    .alphabet button {
-      font-size: 18px;
-      padding: 12px;
-      background: linear-gradient(145deg, #3498db, #2980b9);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s, background 0.3s;
-    }
+        .alphabet button {
+            font-size: 18px;
+            padding: 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
 
-    .alphabet button:hover {
-      transform: scale(1.05);
-      background: linear-gradient(145deg, #5dade2, #3498db);
-    }
+        .alphabet button:hover {
+            background-color: #1abc9c;
+            transform: translateY(-4px);
+        }
 
-    .alphabet button:disabled {
-      background-color: #bdc3c7;
-      cursor: not-allowed;
-    }
+        .alphabet button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
 
-    .checker-message {
-      font-size: 22px;
-      font-weight: 600;
-      padding: 15px;
-      border-radius: 10px;
-      display: none;
-      transition: 0.3s;
-      margin-top: 10px;
-    }
+        /* Animation für Fade-in Effekt */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
 
-    .checker-message.correct {
-      background-color: #2ecc71;
-      color: white;
-    }
+        /* Animation für den Checker */
+        @keyframes correctAnimation {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
 
-    .checker-message.incorrect {
-      background-color: #e74c3c;
-      color: white;
-    }
+        /* Stil für den Checker */
+        .checker-message {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            display: none;
+            transition: opacity 0.5s ease-in-out;
+        }
 
-    button.check-btn {
-      padding: 12px 25px;
-      font-size: 18px;
-      background-color: #2c3e50;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: background 0.3s ease;
-    }
+        .checker-message.correct {
+            background-color: #2ecc71;
+            color: white;
+            animation: correctAnimation 0.5s ease-out;
+        }
 
-    button.check-btn:hover {
-      background-color: #34495e;
-    }
+        .checker-message.incorrect {
+            background-color: #e74c3c;
+            color: white;
+            animation: correctAnimation 0.5s ease-out;
+        }
 
-  </style>
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Guess the Word!</h1>
+    <div class="container">
+        <h1>Guess the Word!</h1>
 
-    <div class="images">
-      <img src="robin1.jpg" alt="Image 1">
-      <img src="robin2.jpg" alt="Image 2">
-      <img src="robin3.jpg" alt="Image 3">
-      <img src="robin4.jpg" alt="Image 4">
+        <!-- Bilder anzeigen -->
+        <div class="images">
+            <img src="robin1.jpg" alt="Robin Hood Bild 1">
+            <img src="robin2.jpg" alt="Image 2">
+            <img src="robin3.jpg" alt="Image 3">
+            <img src="robin4.jpg" alt="Image 4">
+        </div>
+
+        <!-- Leere Eingabefelder für "ROBIN HOOD" -->
+        <div class="input-boxes">
+            <input type="text" id="box1" maxlength="1" oninput="moveFocus(1)">
+            <input type="text" id="box2" maxlength="1" oninput="moveFocus(2)">
+            <input type="text" id="box3" maxlength="1" oninput="moveFocus(3)">
+            <input type="text" id="box4" maxlength="1" oninput="moveFocus(4)">
+            <input type="text" id="box5" maxlength="1" oninput="moveFocus(5)">
+            
+            <span style="width: 20px; display: inline-block;"></span>
+
+            <input type="text" id="box6" maxlength="1" oninput="moveFocus(6)">
+            <input type="text" id="box7" maxlength="1" oninput="moveFocus(7)">
+            <input type="text" id="box8" maxlength="1" oninput="moveFocus(8)">
+            <input type="text" id="box9" maxlength="1" oninput="moveFocus(9)">
+        </div>
+
+        <!-- Alphabet -->
+        <div class="alphabet">
+            <button onclick="typeLetter('A')">A</button>
+            <button onclick="typeLetter('B')">B</button>
+            <button onclick="typeLetter('C')">C</button>
+            <button onclick="typeLetter('D')">D</button>
+            <button onclick="typeLetter('E')">E</button>
+            <button onclick="typeLetter('F')">F</button>
+            <button onclick="typeLetter('G')">G</button>
+            <button onclick="typeLetter('H')">H</button>
+            <button onclick="typeLetter('I')">I</button>
+            <button onclick="typeLetter('J')">J</button>
+            <button onclick="typeLetter('K')">K</button>
+            <button onclick="typeLetter('L')">L</button>
+            <button onclick="typeLetter('M')">M</button>
+            <button onclick="typeLetter('N')">N</button>
+            <button onclick="typeLetter('O')">O</button>
+            <button onclick="typeLetter('P')">P</button>
+            <button onclick="typeLetter('Q')">Q</button>
+            <button onclick="typeLetter('R')">R</button>
+            <button onclick="typeLetter('S')">S</button>
+            <button onclick="typeLetter('T')">T</button>
+            <button onclick="typeLetter('U')">U</button>
+            <button onclick="typeLetter('V')">V</button>
+            <button onclick="typeLetter('W')">W</button>
+            <button onclick="typeLetter('X')">X</button>
+            <button onclick="typeLetter('Y')">Y</button>
+            <button onclick="typeLetter('Z')">Z</button>
+        </div>
+
+        <!-- Überprüfungsbutton -->
+        <button onclick="checkWord()">Check Word</button>
+
+        <!-- Checker Nachricht -->
+        <div id="checkerMessage" class="checker-message"></div>
     </div>
 
-    <div class="input-boxes">
-      <input type="text" id="box1" maxlength="1" oninput="moveFocus(1)">
-      <input type="text" id="box2" maxlength="1" oninput="moveFocus(2)">
-      <input type="text" id="box3" maxlength="1" oninput="moveFocus(3)">
-      <input type="text" id="box4" maxlength="1" oninput="moveFocus(4)">
-      <input type="text" id="box5" maxlength="1" oninput="moveFocus(5)">
-      <span style="width: 20px; display: inline-block;"></span>
-      <input type="text" id="box6" maxlength="1" oninput="moveFocus(6)">
-      <input type="text" id="box7" maxlength="1" oninput="moveFocus(7)">
-      <input type="text" id="box8" maxlength="1" oninput="moveFocus(8)">
-      <input type="text" id="box9" maxlength="1" oninput="moveFocus(9)">
-    </div>
-
-    <div class="alphabet">
-      <button onclick="typeLetter('A')">A</button>
-      <button onclick="typeLetter('B')">B</button>
-      <button onclick="typeLetter('C')">C</button>
-      <button onclick="typeLetter('D')">D</button>
-      <button onclick="typeLetter('E')">E</button>
-      <button onclick="typeLetter('F')">F</button>
-      <button onclick="typeLetter('G')">G</button>
-      <button onclick="typeLetter('H')">H</button>
-      <button onclick="typeLetter('I')">I</button>
-      <button onclick="typeLetter('J')">J</button>
-      <button onclick="typeLetter('K')">K</button>
-      <button onclick="typeLetter('L')">L</button>
-      <button onclick="typeLetter('M')">M</button>
-      <button onclick="typeLetter('N')">N</button>
-      <button onclick="typeLetter('O')">O</button>
-      <button onclick="typeLetter('P')">P</button>
-      <button onclick="typeLetter('Q')">Q</button>
-      <button onclick="typeLetter('R')">R</button>
-      <button onclick="typeLetter('S')">S</button>
-      <button onclick="typeLetter('T')">T</button>
-      <button onclick="typeLetter('U')">U</button>
-      <button onclick="typeLetter('V')">V</button>
-      <button onclick="typeLetter('W')">W</button>
-      <button onclick="typeLetter('X')">X</button>
-      <button onclick="typeLetter('Y')">Y</button>
-      <button onclick="typeLetter('Z')">Z</button>
-    </div>
-
-    <button class="check-btn" onclick="checkWord()">Check Word</button>
-    <div id="checkerMessage" class="checker-message"></div>
-  </div>
-
-  <script>
-    function moveFocus(currentBox) {
-      if (currentBox < 9) {
-        document.getElementById('box' + (currentBox + 1)).focus();
-      }
-    }
-
-    function typeLetter(letter) {
-      for (let i = 1; i <= 9; i++) {
-        const box = document.getElementById('box' + i);
-        if (box.value === '') {
-          box.value = letter;
-          break;
+    <script>
+        // Automatisch zum nächsten Feld springen
+        function moveFocus(currentBox) {
+            if (currentBox < 9) {
+                document.getElementById('box' + (currentBox + 1)).focus();
+            }
         }
-      }
-    }
 
-    function checkWord() {
-      const correct = "ROBINHOOD";
-      let userInput = '';
-      for (let i = 1; i <= 9; i++) {
-        userInput += document.getElementById('box' + i).value.toUpperCase();
-      }
-
-      const message = document.getElementById('checkerMessage');
-
-      if (userInput === correct) {
-        message.textContent = "🎉 Correct! It's ROBIN HOOD!";
-        message.className = 'checker-message correct';
-        message.style.display = "block";
-        for (let i = 1; i <= 9; i++) {
-          document.getElementById('box' + i).classList.add('correct');
+        // Buchstaben in die Boxen tippen
+        function typeLetter(letter) {
+            for (let i = 1; i <= 9; i++) {
+                if (document.getElementById('box' + i).value === '') {
+                    document.getElementById('box' + i).value = letter;
+                    break;
+                }
+            }
         }
-      } else {
-        message.textContent = "❌ Wrong guess. Try again!";
-        message.className = 'checker-message incorrect';
-        message.style.display = "block";
-        for (let i = 1; i <= 9; i++) {
-          const box = document.getElementById('box' + i);
-          box.value = '';
-          box.classList.remove('correct', 'incorrect');
+
+        // Überprüfen, ob das eingegebene Wort korrekt ist
+        function checkWord() {
+            const word = "ROBINHOOD";
+            let userWord = "";
+            for (let i = 1; i <= 9; i++) {
+                userWord += document.getElementById('box' + i).value.toUpperCase();
+            }
+
+            let checkerMessage = document.getElementById('checkerMessage');
+            if (userWord === word) {
+                checkerMessage.classList.add('correct');
+                checkerMessage.classList.remove('incorrect');
+                checkerMessage.innerHTML = "Congratulations! You've guessed the word!";
+                checkerMessage.style.display = "block";
+                markCorrect();
+            } else {
+                checkerMessage.classList.add('incorrect');
+                checkerMessage.classList.remove('correct');
+                checkerMessage.innerHTML = "Oops! Try again!";
+                checkerMessage.style.display = "block";
+                resetInputs();
+            }
         }
-      }
-    }
-  </script>
+
+        // Markiere die Eingabefelder als korrekt
+        function markCorrect() {
+            for (let i = 1; i <= 9; i++) {
+                document.getElementById('box' + i).classList.add('correct');
+            }
+        }
+
+        // Setzt alle Eingabefelder zurück
+        function resetInputs() {
+            for (let i = 1; i <= 9; i++) {
+                document.getElementById('box' + i).value = '';
+                document.getElementById('box' + i).classList.remove('correct', 'incorrect');
+            }
+        }
+    </script>
 </body>
 </html>
